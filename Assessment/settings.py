@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'rest_framework',
-    'apps'
+    'apps',
+    'corsheaders',
+    'rest_framework_simplejwt.token_blacklist',
     
 ]
 
@@ -53,6 +55,10 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ),
+
+    'DEFAULT_PERMISSION_CLASSES': (
+   'rest_framework.permissions.AllowAny',
+)
     
    
 }
@@ -98,6 +104,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = 'Assessment.urls'
@@ -167,6 +176,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL="/media/"
+import os
+MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 
 
 
@@ -175,3 +187,12 @@ AUTH_USER_MODEL='main.Account'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+    "http://127.0.0.1:3000"
+]
