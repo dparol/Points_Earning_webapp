@@ -29,14 +29,14 @@ class Socialapp(models.Model):
     app_category=models.CharField(max_length=100,choices=cat_choice)
     sub_cat=models.CharField(max_length=50,choices=sub_cate)
     points=models.IntegerField()
-    app_img=models.ImageField()
+    app_img=models.ImageField(upload_to='images')
 
     created_date=models.DateTimeField(auto_now_add=True)
 
 class UsermakePoints(models.Model):
     user=models.ForeignKey(Account,on_delete=models.CASCADE,null=True,blank=True)
     app=models.ForeignKey(Socialapp,on_delete=models.CASCADE)
-    screen_short=models.ImageField()
+    screen_shot=models.ImageField()
     created_time=models.DateTimeField(auto_now_add=True)
 
 class Totalpoints(models.Model):

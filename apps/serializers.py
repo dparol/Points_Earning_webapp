@@ -9,7 +9,7 @@ class SocialappSerializer(serializers.ModelSerializer):
 class Usermakepointserializer(serializers.ModelSerializer):
     class Meta:
         model=UsermakePoints
-        fields=['screen_short']
+        fields=['screen_shot']
 
 
 class Totalpointsserializer(serializers.ModelSerializer):

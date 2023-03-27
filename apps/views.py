@@ -14,7 +14,7 @@ from django.db.models import Sum
 
 
 
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 class CreateNew_app(CreateAPIView):
     queryset=Socialapp.objects.all()
     serializer_class=SocialappSerializer
@@ -54,27 +54,27 @@ class ListAllapps(ListCreateAPIView):
 
 class createpoints(ListCreateAPIView):
     queryset=UsermakePoints.objects.all()
-    queryset=Account.objects.all()
-    queryset=Socialapp.objects.all()
+    
     serializer_class=Usermakepointserializer
 
     def post(self,request,id):
         
         data=request.data
-        currentuser=request.user
+        currentuser=data['user']
         print(currentuser)
         user=Account.objects.get(username=currentuser)
         print(user)
         
         app=Socialapp.objects.get(id=id)
         print(app)
-        image=data['screen_short']
+
+        image=data['screen_shot']
         print(image)
 
         makenewpoint=UsermakePoints.objects.create(
             user=user,
             app=app,
-            screen_short=image
+            screen_shot=image
 
 
         )
